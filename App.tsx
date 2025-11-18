@@ -251,23 +251,26 @@ const App: React.FC = () => {
         if (unifiedView === 'none') {
             return (
                 <>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 text-center">
-                            <p className="text-2xl font-bold text-indigo-600">{transformedData.length}</p>
-                            <p className="text-sm font-medium text-gray-500">Total Rows</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+                        <div className="bg-gradient-to-br from-teal-50 to-cyan-50 p-6 rounded-xl shadow-sm border border-teal-100 text-center transform transition-all duration-200 hover:scale-105">
+                            <p className="text-4xl font-bold text-teal-600 mb-1">{transformedData.length}</p>
+                            <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Total Rows</p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 text-center">
-                            <p className="text-2xl font-bold text-indigo-600">{Object.keys(categorizedData).length}</p>
-                            <p className="text-sm font-medium text-gray-500">Categories</p>
+                        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl shadow-sm border border-blue-100 text-center transform transition-all duration-200 hover:scale-105">
+                            <p className="text-4xl font-bold text-blue-600 mb-1">{Object.keys(categorizedData).length}</p>
+                            <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Categories</p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 text-center">
-                            <p className="text-2xl font-bold text-indigo-600">{finalHeaders.length}</p>
-                            <p className="text-sm font-medium text-gray-500">Columns</p>
+                        <div className="bg-gradient-to-br from-cyan-50 to-teal-50 p-6 rounded-xl shadow-sm border border-cyan-100 text-center transform transition-all duration-200 hover:scale-105">
+                            <p className="text-4xl font-bold text-cyan-600 mb-1">{finalHeaders.length}</p>
+                            <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Columns</p>
                         </div>
                     </div>
-    
-                    <div className="mb-8">
-                        <h2 className="text-2xl font-bold mb-4 text-gray-800">Categorized Results</h2>
+
+                    <div className="mb-10">
+                        <div className="flex items-center mb-6">
+                            <div className="h-1 w-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full mr-3"></div>
+                            <h2 className="text-2xl font-bold text-gray-900">Categorized Results</h2>
+                        </div>
                         {Object.entries(categorizedData)
                             .sort(([a], [b]) => a.localeCompare(b))
                             .map(([category, data]) => (
@@ -275,10 +278,13 @@ const App: React.FC = () => {
                             ))}
                     </div>
 
-                    <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 mb-8">
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-2xl font-bold text-gray-800">Unified Table</h2>
-                            <div className="flex items-center space-x-2">
+                    <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200 mb-10">
+                        <div className="flex items-center justify-between mb-6">
+                            <div className="flex items-center">
+                                <div className="h-1 w-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full mr-3"></div>
+                                <h2 className="text-2xl font-bold text-gray-900">Unified Table</h2>
+                            </div>
+                            <div className="flex items-center gap-2">
                                 <ExcelExportButton headers={finalHeaders} data={transformedData} filename="Unified_Table.xlsx" />
                                 <CopyButton headers={finalHeaders} data={transformedData} />
                             </div>
@@ -296,22 +302,25 @@ const App: React.FC = () => {
     
             return (
                  <div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 text-center">
-                            <p className="text-2xl font-bold text-indigo-600">{transformedData.length}</p>
-                            <p className="text-sm font-medium text-gray-500">Total Rows</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+                        <div className="bg-gradient-to-br from-teal-50 to-cyan-50 p-6 rounded-xl shadow-sm border border-teal-100 text-center transform transition-all duration-200 hover:scale-105">
+                            <p className="text-4xl font-bold text-teal-600 mb-1">{transformedData.length}</p>
+                            <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Total Rows</p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 text-center">
-                            <p className="text-2xl font-bold text-indigo-600">{Object.keys(categorizedData).length}</p>
-                            <p className="text-sm font-medium text-gray-500">Categories</p>
+                        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl shadow-sm border border-blue-100 text-center transform transition-all duration-200 hover:scale-105">
+                            <p className="text-4xl font-bold text-blue-600 mb-1">{Object.keys(categorizedData).length}</p>
+                            <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Categories</p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 text-center">
-                            <p className="text-2xl font-bold text-indigo-600">{headersWithRdQuota.length}</p>
-                            <p className="text-sm font-medium text-gray-500">Columns</p>
+                        <div className="bg-gradient-to-br from-cyan-50 to-teal-50 p-6 rounded-xl shadow-sm border border-cyan-100 text-center transform transition-all duration-200 hover:scale-105">
+                            <p className="text-4xl font-bold text-cyan-600 mb-1">{headersWithRdQuota.length}</p>
+                            <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Columns</p>
                         </div>
                     </div>
-                    <div className="mb-8">
-                        <h2 className="text-2xl font-bold mb-4 text-gray-800">RDQuotas Categorized by Request Type</h2>
+                    <div className="mb-10">
+                        <div className="flex items-center mb-6">
+                            <div className="h-1 w-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full mr-3"></div>
+                            <h2 className="text-2xl font-bold text-gray-900">RDQuotas Categorized by Request Type</h2>
+                        </div>
                         {Object.entries(categorizedData)
                             .sort(([a], [b]) => a.localeCompare(b))
                             .map(([category, data]) => (
@@ -324,10 +333,13 @@ const App: React.FC = () => {
                             ))}
                     </div>
     
-                    <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-2xl font-bold text-gray-800">Unified Table</h2>
-                            <div className="flex items-center space-x-2">
+                    <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                        <div className="flex items-center justify-between mb-6">
+                            <div className="flex items-center">
+                                <div className="h-1 w-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full mr-3"></div>
+                                <h2 className="text-2xl font-bold text-gray-900">Unified Table</h2>
+                            </div>
+                            <div className="flex items-center gap-2">
                                  <ExcelExportButton headers={headersWithRdQuota} data={unifiedDataWithRdQuota} filename="Unified_Table_by_RDQuota.xlsx" />
                                  <CopyButton headers={headersWithRdQuota} data={unifiedDataWithRdQuota} />
                             </div>
@@ -343,45 +355,45 @@ const App: React.FC = () => {
 
 
     return (
-        <div className="min-h-screen font-sans text-gray-900">
-            <header className="bg-white shadow-sm">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                    <h1 className="text-2xl font-bold text-gray-800">Quota Data Transformer</h1>
-                    <p className="text-gray-600 mt-1">Paste raw data to categorize and transform it according to predefined rules.</p>
+        <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
+            <header className="bg-white shadow-sm border-b border-gray-200">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                    <h1 className="text-3xl font-bold text-gray-900">Quota Data Transformer</h1>
+                    <p className="text-gray-500 mt-2">Transform and categorize quota data with ease</p>
                 </div>
             </header>
-            
-            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 max-w-7xl">
                 <DataInputCard onDataLoaded={handleDataLoaded} />
                 
-                <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 mb-8">
-                     <label htmlFor="raw-input" className="block text-lg font-semibold text-gray-700 mb-2">Raw Table Input</label>
+                <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200 mb-8">
+                     <label htmlFor="raw-input" className="block text-lg font-bold text-gray-900 mb-3">Raw Table Input</label>
                     <textarea
                         id="raw-input"
                         rows={10}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out font-sans text-sm bg-white text-gray-800"
+                        className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition duration-200 font-mono text-sm bg-gray-50 text-gray-800 placeholder-gray-400"
                         placeholder="Data loaded from the upload section will appear here. You can also paste directly and edit before transforming..."
                         value={rawInput}
                         onChange={(e) => setRawInput(e.target.value)}
                     />
-                    <div className="mt-4 flex justify-end space-x-4">
+                    <div className="mt-6 flex flex-wrap justify-end gap-3">
                         <button
                             onClick={handleClear}
-                            className="px-6 py-2 bg-white text-gray-700 font-semibold rounded-lg border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                            className="px-6 py-2.5 bg-white text-gray-700 font-semibold rounded-full border border-gray-300 hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-all duration-200 shadow-sm"
                         >
                             Clear
                         </button>
                         {transformedData && (
                              <button
                                 onClick={() => setUnifiedView('full')}
-                                className="px-5 py-2 border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                                className="px-6 py-2.5 border-2 border-teal-600 text-teal-600 font-semibold rounded-full hover:bg-teal-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all duration-200 shadow-sm"
                             >
                                 List by RDQuotas
                             </button>
                         )}
                         <button
                             onClick={handleTransform}
-                            className="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                            className="px-6 py-2.5 bg-gradient-to-r from-teal-600 to-cyan-600 text-white font-semibold rounded-full hover:from-teal-700 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all duration-200 shadow-md"
                         >
                             Transform
                         </button>
@@ -389,9 +401,16 @@ const App: React.FC = () => {
                 </div>
 
                 {error && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-6" role="alert">
-                        <strong className="font-bold">Error: </strong>
-                        <span className="block sm:inline">{error}</span>
+                    <div className="bg-red-50 border-l-4 border-red-500 text-red-800 px-6 py-4 rounded-lg relative mb-8 shadow-sm" role="alert">
+                        <div className="flex items-start">
+                            <svg className="h-5 w-5 text-red-500 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                            </svg>
+                            <div>
+                                <strong className="font-bold">Error: </strong>
+                                <span className="block sm:inline">{error}</span>
+                            </div>
+                        </div>
                     </div>
                 )}
                 

@@ -7,22 +7,22 @@ interface DataTableProps {
 
 const DataTable: React.FC<DataTableProps> = ({ headers, data }) => {
     return (
-        <div className="overflow-x-auto rounded-lg border border-gray-700">
-            <table className="min-w-full bg-gray-800 text-sm">
-                <thead>
-                    <tr className="divide-x divide-gray-700">
+        <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+            <table className="min-w-full bg-white text-sm">
+                <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
+                    <tr className="divide-x divide-gray-200">
                         {headers.map((header) => (
-                            <th key={header} className="whitespace-nowrap px-4 py-3 text-center font-medium text-white">
+                            <th key={header} className="whitespace-nowrap px-5 py-3.5 text-center font-bold text-gray-700 uppercase tracking-wider text-xs">
                                 {header}
                             </th>
                         ))}
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-700">
+                <tbody className="divide-y divide-gray-200">
                     {data.map((row, rowIndex) => (
-                        <tr key={row['Original ID'] || rowIndex} className="divide-x divide-gray-700 hover:bg-gray-700">
+                        <tr key={row['Original ID'] || rowIndex} className={`divide-x divide-gray-200 transition-colors duration-150 ${rowIndex % 2 === 0 ? 'bg-white hover:bg-teal-50' : 'bg-gray-50 hover:bg-teal-50'}`}>
                             {headers.map((header, colIndex) => (
-                                <td key={`${rowIndex}-${colIndex}`} className="whitespace-nowrap px-4 py-3 text-gray-300 text-center">
+                                <td key={`${rowIndex}-${colIndex}`} className="whitespace-nowrap px-5 py-3 text-gray-700 text-center">
                                     {row[header]}
                                 </td>
                             ))}

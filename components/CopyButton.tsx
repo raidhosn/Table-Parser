@@ -63,18 +63,18 @@ const CopyButton: React.FC<CopyButtonProps> = ({ headers, data }) => {
     const buttonContent = {
         idle: {
             text: 'Copy',
-            icon: <ClipboardIcon className="h-4 w-4 mr-2" />,
-            className: 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-gray-300'
+            icon: <ClipboardIcon className="h-4 w-4 mr-1.5" />,
+            className: 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300 hover:border-gray-400 shadow-sm'
         },
         success: {
             text: 'Copied!',
-            icon: <CheckIcon className="h-4 w-4 mr-2" />,
-            className: 'bg-green-100 text-green-700 border-green-300'
+            icon: <CheckIcon className="h-4 w-4 mr-1.5" />,
+            className: 'bg-green-50 text-green-700 border-green-400 shadow-sm'
         },
         error: {
             text: 'Failed',
-            icon: <ClipboardIcon className="h-4 w-4 mr-2" />,
-            className: 'bg-red-100 text-red-700 border-red-300'
+            icon: <ClipboardIcon className="h-4 w-4 mr-1.5" />,
+            className: 'bg-red-50 text-red-700 border-red-400 shadow-sm'
         }
     };
 
@@ -83,7 +83,7 @@ const CopyButton: React.FC<CopyButtonProps> = ({ headers, data }) => {
     return (
         <button
             onClick={handleCopy}
-            className={`flex items-center justify-center px-3 py-1 border text-xs font-medium rounded-md transition-colors duration-150 ${current.className}`}
+            className={`flex items-center justify-center px-4 py-2 border text-xs font-semibold rounded-lg transition-all duration-200 ${current.className}`}
             disabled={copyState !== 'idle'}
         >
             {current.icon}

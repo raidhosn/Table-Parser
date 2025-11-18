@@ -22,33 +22,33 @@ const CategorySection: React.FC<CategorySectionProps> = ({ categoryName, data, h
     const displayHeaders = headers || finalHeaders;
 
     return (
-        <div className="mb-4 rounded-lg bg-white shadow-sm border border-gray-200">
-            <div className="flex w-full items-center justify-between p-4">
+        <div className="mb-6 rounded-xl bg-white shadow-sm border border-gray-200 overflow-hidden transition-all duration-200 hover:shadow-md">
+            <div className="flex w-full items-center justify-between px-6 py-5 bg-gradient-to-r from-gray-50 to-white">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="flex flex-grow items-center text-left"
+                    className="flex flex-grow items-center text-left group"
                     aria-expanded={isOpen}
                 >
-                    <h3 className="text-lg font-semibold text-gray-800">
-                        {categoryName} <span className="text-sm font-normal text-gray-500">({data.length} rows)</span>
+                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-teal-600 transition-colors">
+                        {categoryName} <span className="text-sm font-medium text-gray-500 ml-2">({data.length} rows)</span>
                     </h3>
-                    <ChevronDownIcon className={`h-5 w-5 ml-2 text-gray-500 transition-transform ${isOpen ? '' : '-rotate-90'}`} />
+                    <ChevronDownIcon className={`h-5 w-5 ml-3 text-gray-400 group-hover:text-teal-600 transition-all duration-200 ${isOpen ? '' : '-rotate-90'}`} />
                 </button>
-                <div className="flex-shrink-0 flex items-center space-x-2">
+                <div className="flex-shrink-0 flex items-center gap-2">
                     <ExcelExportButton headers={displayHeaders} data={data} filename={`${categoryName.replace(/[\s/]/g, '_')}.xlsx`} />
                     <CopyButton headers={displayHeaders} data={data} />
                 </div>
             </div>
             {isOpen && (
-                <div className="p-4 pt-0">
-                    <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 mb-4">
-                        <div className="bg-gray-50 p-3 rounded-md shadow-sm border border-gray-200 text-center">
-                            <p className="text-xl font-bold text-indigo-600">{data.length}</p>
-                            <p className="text-xs font-medium text-gray-500">Rows</p>
+                <div className="p-6 pt-4">
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                        <div className="bg-gradient-to-br from-teal-50 to-cyan-50 p-4 rounded-lg border border-teal-100 text-center">
+                            <p className="text-2xl font-bold text-teal-600">{data.length}</p>
+                            <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide mt-1">Rows</p>
                         </div>
-                        <div className="bg-gray-50 p-3 rounded-md shadow-sm border border-gray-200 text-center">
-                            <p className="text-xl font-bold text-indigo-600">{displayHeaders.length}</p>
-                            <p className="text-xs font-medium text-gray-500">Columns</p>
+                        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-4 rounded-lg border border-blue-100 text-center">
+                            <p className="text-2xl font-bold text-blue-600">{displayHeaders.length}</p>
+                            <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide mt-1">Columns</p>
                         </div>
                     </div>
                     <DataTable headers={displayHeaders} data={data} />
