@@ -50,7 +50,7 @@ const App: React.FC = () => {
     const [categorizedData, setCategorizedData] = useState<Record<string, TransformedRow[]> | null>(null);
     const [transformedData, setTransformedData] = useState<TransformedRow[] | null>(null);
     const [error, setError] = useState<string | null>(null);
-    const [unifiedView, setUnifiedView] = useState<'none' | 'unified' | 'full'>('none');
+    const [unifiedView, setUnifiedView] = useState<'none' | 'full'>('none');
     const [isUploadModalOpen, setIsUploadModalOpen] = useState<boolean>(false);
     
     const handleTransform = useCallback(() => {
@@ -274,58 +274,19 @@ const App: React.FC = () => {
                                 <CategorySection key={category} categoryName={category} data={data} />
                             ))}
                     </div>
-    
+
                     <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 mb-8">
-                        <h2 className="text-xl font-semibold mb-4 text-gray-800">Next Steps</h2>
-                        <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-                            <button
-                                onClick={() => setUnifiedView('unified')}
-                                className="w-full sm:w-auto px-5 py-2 border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
-                            >
-                                Combine into unified table
-                            </button>
-                            <button
-                                onClick={() => setUnifiedView('full')}
-                                className="w-full sm:w-auto px-5 py-2 border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
-                            >
-                                List by RDQuotas
-                            </button>
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-2xl font-bold text-gray-800">Unified Table</h2>
+                            <div className="flex items-center space-x-2">
+                                <ExcelExportButton headers={finalHeaders} data={transformedData} filename="Unified_Table.xlsx" />
+                                <CopyButton headers={finalHeaders} data={transformedData} />
+                            </div>
                         </div>
+                        <DataTable headers={finalHeaders} data={transformedData} />
                     </div>
                 </>
             );
-        }
-
-        const BackButton = () => (
-             <button
-                onClick={() => setUnifiedView('none')}
-                className="flex items-center px-4 py-2 mb-6 bg-white text-gray-700 font-semibold rounded-lg border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
-            >
-               ← Back to Categories
-            </button>
-        );
-
-        // Unified Table View
-        if (unifiedView === 'unified') {
-             const headers = finalHeaders;
-             const data = transformedData;
-             const title = 'Unified Table';
-             const filename = 'Unified_Table.xlsx';
-            return (
-                <div>
-                    <BackButton />
-                    <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
-                            <div className="flex items-center space-x-2">
-                                <ExcelExportButton headers={headers} data={data} filename={filename} />
-                                <CopyButton headers={headers} data={data} />
-                            </div>
-                        </div>
-                        <DataTable headers={headers} data={data} />
-                    </div>
-                </div>
-            )
         }
     
         // List by RDQuotas View
@@ -335,7 +296,20 @@ const App: React.FC = () => {
     
             return (
                  <div>
-                    <BackButton />
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 text-center">
+                            <p className="text-2xl font-bold text-indigo-600">{transformedData.length}</p>
+                            <p className="text-sm font-medium text-gray-500">Total Rows</p>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 text-center">
+                            <p className="text-2xl font-bold text-indigo-600">{Object.keys(categorizedData).length}</p>
+                            <p className="text-sm font-medium text-gray-500">Categories</p>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 text-center">
+                            <p className="text-2xl font-bold text-indigo-600">{headersWithRdQuota.length}</p>
+                            <p className="text-sm font-medium text-gray-500">Columns</p>
+                        </div>
+                    </div>
                     <div className="mb-8">
                         <h2 className="text-2xl font-bold mb-4 text-gray-800">RDQuotas Categorized by Request Type</h2>
                         {Object.entries(categorizedData)
@@ -381,15 +355,7 @@ const App: React.FC = () => {
                 <DataInputCard onDataLoaded={handleDataLoaded} />
                 
                 <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 mb-8">
-                     <div className="flex justify-between items-center mb-2">
-                        <label htmlFor="raw-input" className="block text-lg font-semibold text-gray-700">Raw Table Input</label>
-                        <button
-                            onClick={() => setIsUploadModalOpen(true)}
-                            className="px-4 py-2 bg-white text-indigo-600 font-semibold rounded-lg border border-indigo-600 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors text-sm"
-                        >
-                            Upload Your Data
-                        </button>
-                    </div>
+                     <label htmlFor="raw-input" className="block text-lg font-semibold text-gray-700 mb-2">Raw Table Input</label>
                     <textarea
                         id="raw-input"
                         rows={10}
@@ -405,6 +371,14 @@ const App: React.FC = () => {
                         >
                             Clear
                         </button>
+                        {transformedData && (
+                             <button
+                                onClick={() => setUnifiedView('full')}
+                                className="px-5 py-2 border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                            >
+                                List by RDQuotas
+                            </button>
+                        )}
                         <button
                             onClick={handleTransform}
                             className="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
