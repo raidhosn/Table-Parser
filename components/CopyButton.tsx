@@ -19,27 +19,17 @@ const CheckIcon: React.FC<{ className?: string }> = ({ className }) => (
 
 
 const copyTableToClipboard = async (headers: string[], data: Record<string, any>[]): Promise<boolean> => {
-    const markdownHeaders = `| ${headers.map(h => `**${h}**`).join(' | ')} |`;
-    const markdownSeparator = `|${headers.map(() => ':---:').join('|')}|`;
-    const markdownRows = data.map(row =>
-        `| ${headers.map(h => String(row[h] ?? '')).join(' | ')} |`
-    ).join('\n');
+    const tsvHeader = headers.join('\t');
+    const tsvBody = data.map(row => headers.map(h => row[h]).join('\t')).join('\n');
+    const tsvString = `${tsvHeader}\n${tsvBody}`;
 
-    const markdownTable = `${markdownHeaders}\n${markdownSeparator}\n${markdownRows}`;
-
-    const htmlTable = `<table style="border-collapse: collapse; font-family: 'Calibri Light', Calibri, sans-serif; font-size: 11pt;">
-<thead>
-<tr>${headers.map(h => `<th style="border: 1px solid #000; padding: 6px; text-align: center; font-weight: bold;">${h}</th>`).join('')}</tr>
-</thead>
-<tbody>
-${data.map(row => `<tr>${headers.map(h => `<td style="border: 1px solid #000; padding: 6px; text-align: center;">${String(row[h] ?? '')}</td>`).join('')}</tr>`).join('\n')}
-</tbody>
-</table>`;
+    const htmlHeader = `<thead><tr>${headers.map(h => `<th style="border: 1px solid #ddd; padding: 8px; text-align: center;">${h}</th>`).join('')}</tr></thead>`;
+    const htmlBody = `<tbody>${data.map(row => `<tr>${headers.map(h => `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${String(row[h] ?? '')}</td>`).join('')}</tr>`).join('')}</tbody>`;
+    const htmlString = `<table style="border-collapse: collapse; width: 100%;">${htmlHeader}${htmlBody}</table>`;
 
     try {
-        const htmlBlob = new Blob([htmlTable], { type: 'text/html' });
-        const textBlob = new Blob([markdownTable], { type: 'text/plain' });
-
+        const htmlBlob = new Blob([htmlString], { type: 'text/html' });
+        const textBlob = new Blob([tsvString], { type: 'text/plain' });
         const clipboardItem = new ClipboardItem({
             'text/html': htmlBlob,
             'text/plain': textBlob,
@@ -49,7 +39,7 @@ ${data.map(row => `<tr>${headers.map(h => `<td style="border: 1px solid #000; pa
     } catch (err) {
         console.error('Failed to copy using ClipboardItem API: ', err);
         try {
-            await navigator.clipboard.writeText(markdownTable);
+            await navigator.clipboard.writeText(tsvString);
             return true;
         } catch (fallbackErr) {
             console.error('Fallback copy to clipboard failed: ', fallbackErr);
@@ -74,17 +64,17 @@ const CopyButton: React.FC<CopyButtonProps> = ({ headers, data }) => {
         idle: {
             text: 'Copy',
             icon: <ClipboardIcon className="h-4 w-4 mr-2" />,
-            className: 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300 hover:border-gray-400 shadow-md hover:shadow-lg'
+            className: 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-gray-300'
         },
         success: {
             text: 'Copied!',
             icon: <CheckIcon className="h-4 w-4 mr-2" />,
-            className: 'bg-green-50 text-green-700 border-green-400 shadow-md'
+            className: 'bg-green-100 text-green-700 border-green-300'
         },
         error: {
             text: 'Failed',
             icon: <ClipboardIcon className="h-4 w-4 mr-2" />,
-            className: 'bg-red-50 text-red-700 border-red-400 shadow-md'
+            className: 'bg-red-100 text-red-700 border-red-300'
         }
     };
 
@@ -93,7 +83,7 @@ const CopyButton: React.FC<CopyButtonProps> = ({ headers, data }) => {
     return (
         <button
             onClick={handleCopy}
-            className={`flex items-center justify-center px-5 py-2.5 border-2 text-xs font-bold rounded-xl transition-all duration-200 ${current.className}`}
+            className={`flex items-center justify-center px-3 py-1 border text-xs font-medium rounded-md transition-colors duration-150 ${current.className}`}
             disabled={copyState !== 'idle'}
         >
             {current.icon}

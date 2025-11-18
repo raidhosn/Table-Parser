@@ -7,22 +7,22 @@ interface DataTableProps {
 
 const DataTable: React.FC<DataTableProps> = ({ headers, data }) => {
     return (
-        <div className="overflow-x-auto rounded-xl border-2 border-gray-200 shadow-md">
-            <table className="min-w-full bg-white text-sm">
-                <thead className="bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 border-b-2 border-gray-300">
-                    <tr className="divide-x divide-gray-300">
+        <div className="overflow-x-auto rounded-lg border border-gray-700">
+            <table className="min-w-full bg-gray-800 text-sm">
+                <thead>
+                    <tr className="divide-x divide-gray-700">
                         {headers.map((header) => (
-                            <th key={header} className="whitespace-nowrap px-6 py-4 text-center font-bold text-gray-800 uppercase tracking-wider text-xs">
+                            <th key={header} className="whitespace-nowrap px-4 py-3 text-center font-medium text-white">
                                 {header}
                             </th>
                         ))}
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-gray-700">
                     {data.map((row, rowIndex) => (
-                        <tr key={row['Original ID'] || rowIndex} className={`divide-x divide-gray-200 transition-all duration-150 ${rowIndex % 2 === 0 ? 'bg-white hover:bg-teal-50/50' : 'bg-gray-50/50 hover:bg-teal-50/50'}`}>
+                        <tr key={row['Original ID'] || rowIndex} className="divide-x divide-gray-700 hover:bg-gray-700">
                             {headers.map((header, colIndex) => (
-                                <td key={`${rowIndex}-${colIndex}`} className="whitespace-nowrap px-6 py-4 text-gray-700 text-center font-medium">
+                                <td key={`${rowIndex}-${colIndex}`} className="whitespace-nowrap px-4 py-3 text-gray-300 text-center">
                                     {row[header]}
                                 </td>
                             ))}

@@ -22,33 +22,33 @@ const CategorySection: React.FC<CategorySectionProps> = ({ categoryName, data, h
     const displayHeaders = headers || finalHeaders;
 
     return (
-        <div className="mb-8 rounded-2xl bg-white shadow-md border-2 border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-gray-300">
-            <div className="flex w-full items-center justify-between px-8 py-6 bg-gradient-to-r from-gray-50 via-white to-gray-50 border-b-2 border-gray-200">
+        <div className="mb-4 rounded-lg bg-white shadow-sm border border-gray-200">
+            <div className="flex w-full items-center justify-between p-4">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="flex flex-grow items-center text-left group"
+                    className="flex flex-grow items-center text-left"
                     aria-expanded={isOpen}
                 >
-                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-teal-600 transition-colors">
-                        {categoryName} <span className="text-sm font-semibold text-gray-500 ml-3 bg-gray-100 px-3 py-1 rounded-full">({data.length} rows)</span>
+                    <h3 className="text-lg font-semibold text-gray-800">
+                        {categoryName} <span className="text-sm font-normal text-gray-500">({data.length} rows)</span>
                     </h3>
-                    <ChevronDownIcon className={`h-6 w-6 ml-4 text-gray-400 group-hover:text-teal-600 transition-all duration-300 ${isOpen ? '' : '-rotate-90'}`} />
+                    <ChevronDownIcon className={`h-5 w-5 ml-2 text-gray-500 transition-transform ${isOpen ? '' : '-rotate-90'}`} />
                 </button>
-                <div className="flex-shrink-0 flex items-center gap-3 ml-4">
+                <div className="flex-shrink-0 flex items-center space-x-2">
                     <ExcelExportButton headers={displayHeaders} data={data} filename={`${categoryName.replace(/[\s/]/g, '_')}.xlsx`} />
                     <CopyButton headers={displayHeaders} data={data} />
                 </div>
             </div>
             {isOpen && (
-                <div className="p-8 bg-gray-50/30">
-                    <div className="grid grid-cols-2 gap-5 mb-8">
-                        <div className="bg-white border-2 border-teal-100 p-5 rounded-xl shadow-sm text-center hover:shadow-md transition-all duration-200">
-                            <p className="text-3xl font-bold bg-gradient-to-br from-teal-600 to-cyan-600 bg-clip-text text-transparent">{data.length}</p>
-                            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mt-2">Rows</p>
+                <div className="p-4 pt-0">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 mb-4">
+                        <div className="bg-gray-50 p-3 rounded-md shadow-sm border border-gray-200 text-center">
+                            <p className="text-xl font-bold text-indigo-600">{data.length}</p>
+                            <p className="text-xs font-medium text-gray-500">Rows</p>
                         </div>
-                        <div className="bg-white border-2 border-blue-100 p-5 rounded-xl shadow-sm text-center hover:shadow-md transition-all duration-200">
-                            <p className="text-3xl font-bold bg-gradient-to-br from-blue-600 to-cyan-600 bg-clip-text text-transparent">{displayHeaders.length}</p>
-                            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mt-2">Columns</p>
+                        <div className="bg-gray-50 p-3 rounded-md shadow-sm border border-gray-200 text-center">
+                            <p className="text-xl font-bold text-indigo-600">{displayHeaders.length}</p>
+                            <p className="text-xs font-medium text-gray-500">Columns</p>
                         </div>
                     </div>
                     <DataTable headers={displayHeaders} data={data} />
