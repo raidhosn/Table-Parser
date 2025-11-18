@@ -1,0 +1,5 @@
+{
+  "name": "Copy of Quota Data Transformer",
+  "description": "An application to parse, transform, and categorize raw quota and enablement data. It renames and reorders columns, applies dynamic visibility rules, normalizes values, and groups the results for clear analysis.",
+  "requestFramePermissions": []
+}
