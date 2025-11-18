@@ -42,11 +42,11 @@ const ExcelExportButton: React.FC<ExcelExportButtonProps> = ({ headers, data, fi
     return (
         <button
             onClick={() => handleExport(headers, data, filename)}
-            className="flex items-center justify-center px-4 py-2 border text-xs font-semibold rounded-lg transition-all duration-200 bg-white text-gray-700 hover:bg-gray-50 border-gray-300 hover:border-gray-400 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center justify-center px-5 py-2.5 border-2 text-xs font-bold rounded-xl transition-all duration-200 bg-white text-gray-700 hover:bg-gray-50 border-gray-300 hover:border-gray-400 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={!data || data.length === 0}
             title="Export to Excel"
         >
-            <DownloadIcon className="h-4 w-4 mr-1.5" />
+            <DownloadIcon className="h-4 w-4 mr-2" />
             Export
         </button>
     );

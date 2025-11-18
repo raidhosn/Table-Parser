@@ -251,25 +251,25 @@ const App: React.FC = () => {
         if (unifiedView === 'none') {
             return (
                 <>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-                        <div className="bg-gradient-to-br from-teal-50 to-cyan-50 p-6 rounded-xl shadow-sm border border-teal-100 text-center transform transition-all duration-200 hover:scale-105">
-                            <p className="text-4xl font-bold text-teal-600 mb-1">{transformedData.length}</p>
-                            <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Total Rows</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+                        <div className="bg-white border-2 border-teal-100 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-teal-200">
+                            <div className="text-5xl font-bold bg-gradient-to-br from-teal-600 to-cyan-600 bg-clip-text text-transparent mb-2">{transformedData.length}</div>
+                            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Total Rows</p>
                         </div>
-                        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl shadow-sm border border-blue-100 text-center transform transition-all duration-200 hover:scale-105">
-                            <p className="text-4xl font-bold text-blue-600 mb-1">{Object.keys(categorizedData).length}</p>
-                            <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Categories</p>
+                        <div className="bg-white border-2 border-blue-100 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-blue-200">
+                            <div className="text-5xl font-bold bg-gradient-to-br from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-2">{Object.keys(categorizedData).length}</div>
+                            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Categories</p>
                         </div>
-                        <div className="bg-gradient-to-br from-cyan-50 to-teal-50 p-6 rounded-xl shadow-sm border border-cyan-100 text-center transform transition-all duration-200 hover:scale-105">
-                            <p className="text-4xl font-bold text-cyan-600 mb-1">{finalHeaders.length}</p>
-                            <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Columns</p>
+                        <div className="bg-white border-2 border-cyan-100 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-cyan-200">
+                            <div className="text-5xl font-bold bg-gradient-to-br from-cyan-600 to-teal-600 bg-clip-text text-transparent mb-2">{finalHeaders.length}</div>
+                            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Columns</p>
                         </div>
                     </div>
 
-                    <div className="mb-10">
-                        <div className="flex items-center mb-6">
-                            <div className="h-1 w-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full mr-3"></div>
-                            <h2 className="text-2xl font-bold text-gray-900">Categorized Results</h2>
+                    <div className="mb-12">
+                        <div className="flex items-center mb-8">
+                            <div className="h-1.5 w-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full mr-4"></div>
+                            <h2 className="text-3xl font-bold text-gray-900">Categorized Results</h2>
                         </div>
                         {Object.entries(categorizedData)
                             .sort(([a], [b]) => a.localeCompare(b))
@@ -278,13 +278,13 @@ const App: React.FC = () => {
                             ))}
                     </div>
 
-                    <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200 mb-10">
-                        <div className="flex items-center justify-between mb-6">
+                    <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-200 mb-12 hover:shadow-xl transition-shadow duration-300">
+                        <div className="flex items-center justify-between mb-8">
                             <div className="flex items-center">
-                                <div className="h-1 w-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full mr-3"></div>
-                                <h2 className="text-2xl font-bold text-gray-900">Unified Table</h2>
+                                <div className="h-1.5 w-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full mr-4"></div>
+                                <h2 className="text-3xl font-bold text-gray-900">Unified Table</h2>
                             </div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-3">
                                 <ExcelExportButton headers={finalHeaders} data={transformedData} filename="Unified_Table.xlsx" />
                                 <CopyButton headers={finalHeaders} data={transformedData} />
                             </div>
@@ -302,24 +302,24 @@ const App: React.FC = () => {
     
             return (
                  <div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-                        <div className="bg-gradient-to-br from-teal-50 to-cyan-50 p-6 rounded-xl shadow-sm border border-teal-100 text-center transform transition-all duration-200 hover:scale-105">
-                            <p className="text-4xl font-bold text-teal-600 mb-1">{transformedData.length}</p>
-                            <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Total Rows</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+                        <div className="bg-white border-2 border-teal-100 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-teal-200">
+                            <div className="text-5xl font-bold bg-gradient-to-br from-teal-600 to-cyan-600 bg-clip-text text-transparent mb-2">{transformedData.length}</div>
+                            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Total Rows</p>
                         </div>
-                        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl shadow-sm border border-blue-100 text-center transform transition-all duration-200 hover:scale-105">
-                            <p className="text-4xl font-bold text-blue-600 mb-1">{Object.keys(categorizedData).length}</p>
-                            <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Categories</p>
+                        <div className="bg-white border-2 border-blue-100 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-blue-200">
+                            <div className="text-5xl font-bold bg-gradient-to-br from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-2">{Object.keys(categorizedData).length}</div>
+                            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Categories</p>
                         </div>
-                        <div className="bg-gradient-to-br from-cyan-50 to-teal-50 p-6 rounded-xl shadow-sm border border-cyan-100 text-center transform transition-all duration-200 hover:scale-105">
-                            <p className="text-4xl font-bold text-cyan-600 mb-1">{headersWithRdQuota.length}</p>
-                            <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Columns</p>
+                        <div className="bg-white border-2 border-cyan-100 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-cyan-200">
+                            <div className="text-5xl font-bold bg-gradient-to-br from-cyan-600 to-teal-600 bg-clip-text text-transparent mb-2">{headersWithRdQuota.length}</div>
+                            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Columns</p>
                         </div>
                     </div>
-                    <div className="mb-10">
-                        <div className="flex items-center mb-6">
-                            <div className="h-1 w-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full mr-3"></div>
-                            <h2 className="text-2xl font-bold text-gray-900">RDQuotas Categorized by Request Type</h2>
+                    <div className="mb-12">
+                        <div className="flex items-center mb-8">
+                            <div className="h-1.5 w-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full mr-4"></div>
+                            <h2 className="text-3xl font-bold text-gray-900">RDQuotas Categorized by Request Type</h2>
                         </div>
                         {Object.entries(categorizedData)
                             .sort(([a], [b]) => a.localeCompare(b))
@@ -333,13 +333,13 @@ const App: React.FC = () => {
                             ))}
                     </div>
     
-                    <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-                        <div className="flex items-center justify-between mb-6">
+                    <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                        <div className="flex items-center justify-between mb-8">
                             <div className="flex items-center">
-                                <div className="h-1 w-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full mr-3"></div>
-                                <h2 className="text-2xl font-bold text-gray-900">Unified Table</h2>
+                                <div className="h-1.5 w-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full mr-4"></div>
+                                <h2 className="text-3xl font-bold text-gray-900">Unified Table</h2>
                             </div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-3">
                                  <ExcelExportButton headers={headersWithRdQuota} data={unifiedDataWithRdQuota} filename="Unified_Table_by_RDQuota.xlsx" />
                                  <CopyButton headers={headersWithRdQuota} data={unifiedDataWithRdQuota} />
                             </div>
@@ -355,23 +355,31 @@ const App: React.FC = () => {
 
 
     return (
-        <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
-            <header className="bg-white shadow-sm border-b border-gray-200">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-                    <h1 className="text-3xl font-bold text-gray-900">Quota Data Transformer</h1>
-                    <p className="text-gray-500 mt-2">Transform and categorize quota data with ease</p>
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 font-sans text-gray-900">
+            <header className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-gray-200 sticky top-0 z-10">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div className="flex items-center gap-3 mb-2">
+                        <div className="h-10 w-10 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-lg flex items-center justify-center shadow-md">
+                            <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                        </div>
+                        <h1 className="text-3xl font-bold text-gray-900">Quota Data Transformer</h1>
+                    </div>
+                    <p className="text-gray-600 ml-13">Transform and categorize quota data with ease</p>
                 </div>
             </header>
 
-            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 max-w-7xl">
+            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-7xl">
                 <DataInputCard onDataLoaded={handleDataLoaded} />
                 
-                <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200 mb-8">
-                     <label htmlFor="raw-input" className="block text-lg font-bold text-gray-900 mb-3">Raw Table Input</label>
+                <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-200 mb-8 hover:shadow-lg transition-shadow duration-300">
+                     <label htmlFor="raw-input" className="block text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <svg className="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Raw Table Input
+                    </label>
                     <textarea
                         id="raw-input"
                         rows={10}
-                        className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition duration-200 font-mono text-sm bg-gray-50 text-gray-800 placeholder-gray-400"
+                        className="w-full p-5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-200 font-mono text-sm bg-gray-50/50 text-gray-800 placeholder-gray-400 hover:border-gray-300"
                         placeholder="Data loaded from the upload section will appear here. You can also paste directly and edit before transforming..."
                         value={rawInput}
                         onChange={(e) => setRawInput(e.target.value)}
@@ -379,21 +387,21 @@ const App: React.FC = () => {
                     <div className="mt-6 flex flex-wrap justify-end gap-3">
                         <button
                             onClick={handleClear}
-                            className="px-6 py-2.5 bg-white text-gray-700 font-semibold rounded-full border border-gray-300 hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-all duration-200 shadow-sm"
+                            className="px-6 py-3 bg-white text-gray-700 font-semibold rounded-xl border-2 border-gray-200 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-all duration-200 shadow-sm hover:shadow-md"
                         >
                             Clear
                         </button>
                         {transformedData && (
                              <button
                                 onClick={() => setUnifiedView('full')}
-                                className="px-6 py-2.5 border-2 border-teal-600 text-teal-600 font-semibold rounded-full hover:bg-teal-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all duration-200 shadow-sm"
+                                className="px-6 py-3 border-2 border-teal-600 text-teal-600 font-semibold rounded-xl hover:bg-teal-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all duration-200 shadow-sm hover:shadow-md"
                             >
                                 List by RDQuotas
                             </button>
                         )}
                         <button
                             onClick={handleTransform}
-                            className="px-6 py-2.5 bg-gradient-to-r from-teal-600 to-cyan-600 text-white font-semibold rounded-full hover:from-teal-700 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all duration-200 shadow-md"
+                            className="px-6 py-3 bg-gradient-to-r from-teal-600 to-cyan-600 text-white font-semibold rounded-xl hover:from-teal-700 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                         >
                             Transform
                         </button>
@@ -401,14 +409,14 @@ const App: React.FC = () => {
                 </div>
 
                 {error && (
-                    <div className="bg-red-50 border-l-4 border-red-500 text-red-800 px-6 py-4 rounded-lg relative mb-8 shadow-sm" role="alert">
+                    <div className="bg-red-50 border-l-4 border-red-500 text-red-800 px-6 py-5 rounded-xl relative mb-8 shadow-md" role="alert">
                         <div className="flex items-start">
-                            <svg className="h-5 w-5 text-red-500 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="h-6 w-6 text-red-500 mr-4 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                             </svg>
                             <div>
-                                <strong className="font-bold">Error: </strong>
-                                <span className="block sm:inline">{error}</span>
+                                <strong className="font-bold text-base">Error: </strong>
+                                <span className="block sm:inline text-sm">{error}</span>
                             </div>
                         </div>
                     </div>
