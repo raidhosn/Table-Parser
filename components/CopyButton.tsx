@@ -23,16 +23,36 @@ const copyTableToClipboard = async (headers: string[], data: Record<string, any>
     const tsvBody = data.map(row => headers.map(h => row[h]).join('\t')).join('\n');
     const tsvString = `${tsvHeader}\n${tsvBody}`;
 
-    const htmlHeader = `<thead><tr>${headers.map(h => `<th style="border: 1px solid #ddd; padding: 8px; text-align: center;">${h}</th>`).join('')}</tr></thead>`;
-    const htmlBody = `<tbody>${data.map(row => `<tr>${headers.map(h => `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${String(row[h] ?? '')}</td>`).join('')}</tr>`).join('')}</tbody>`;
-    const htmlString = `<table style="border-collapse: collapse; width: 100%;">${htmlHeader}${htmlBody}</table>`;
+    const htmlHeader = `<thead><tr>${headers.map(h => `<th style="border: 1px solid #ddd; padding: 8px; text-align: center; font-family: 'Calibri Light', Calibri, sans-serif; font-size: 11pt;">${h}</th>`).join('')}</tr></thead>`;
+    const htmlBody = `<tbody>${data.map(row => `<tr>${headers.map(h => `<td style="border: 1px solid #ddd; padding: 8px; text-align: center; font-family: 'Calibri Light', Calibri, sans-serif; font-size: 11pt;">${String(row[h] ?? '')}</td>`).join('')}</tr>`).join('')}</tbody>`;
+    const htmlString = `<table style="border-collapse: collapse; width: 100%; font-family: 'Calibri Light', Calibri, sans-serif; font-size: 11pt;">${htmlHeader}${htmlBody}</table>`;
+
+    const rtfEscape = (str: string): string => {
+        return String(str).replace(/\\/g, '\\\\').replace(/\{/g, '\\{').replace(/\}/g, '\\}');
+    };
+
+    const rtfTable = [
+        '{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0 Calibri Light;}}',
+        '\\fs22',
+        '\\trowd',
+        headers.map((_, i) => `\\cellx${(i + 1) * 2000}`).join(''),
+        headers.map(h => `\\intbl ${rtfEscape(h)}\\cell`).join(''),
+        '\\row',
+        ...data.map(row =>
+            `\\trowd${headers.map((_, i) => `\\cellx${(i + 1) * 2000}`).join('')}${headers.map(h => `\\intbl ${rtfEscape(row[h])}\\cell`).join('')}\\row`
+        ),
+        '}'
+    ].join('\n');
 
     try {
         const htmlBlob = new Blob([htmlString], { type: 'text/html' });
         const textBlob = new Blob([tsvString], { type: 'text/plain' });
+        const rtfBlob = new Blob([rtfTable], { type: 'text/rtf' });
+
         const clipboardItem = new ClipboardItem({
             'text/html': htmlBlob,
             'text/plain': textBlob,
+            'text/rtf': rtfBlob,
         });
         await navigator.clipboard.write([clipboardItem]);
         return true;
